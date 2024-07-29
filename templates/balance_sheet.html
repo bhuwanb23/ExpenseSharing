@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Balance Sheet</h2>
+
+<h3>Individual Expenses</h3>
+<table class="table table-striped mt-3">
+    <thead>
+        <tr>
+            <th>User ID</th>
+            <th>User Name</th>
+            <th>Total Expenses</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.name }}</td>
+            <td>
+                {{ user.user_expenses | map(attribute='amount') | sum }}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h3>Overall Expenses</h3>
+<table class="table table-striped mt-3">
+    <thead>
+        <tr>
+            <th>Expense ID</th>
+            <th>Description</th>
+            <th>Total Amount</th>
+            <th>Users</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for expense in expenses %}
+        <tr>
+            <td>{{ expense.id }}</td>
+            <td>{{ expense.description }}</td>
+            <td>{{ expense.total }}</td>
+            <td>
+                <ul>
+                    {% for ue in expense.user_expenses %}
+                    <li>{{ ue.user.name }}: {{ ue.amount }}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{{ url_for('download_balance_sheet') }}" class="btn btn-primary">Download Balance Sheet</a>
+{% endblock %}
