@@ -30,8 +30,8 @@ Ensure you have Python and `pip` installed. You’ll also need to have `git` if 
 ### Clone the Repository
 
 ```sh
-git clone https://github.com/yourusername/expense-sharing-app.git
-cd expense-sharing-app
+git clone https://github.com/bhuwanb23/ExpenseSharing.git
+cd ExpenseSharing
 ```
 
 ### Set Up a Virtual Environment
